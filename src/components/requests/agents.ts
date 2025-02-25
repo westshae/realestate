@@ -75,7 +75,31 @@ interface ResponseAgent {
   tm_member_id: string;
 }
 
+export interface StorageAgent {
+  id: string;
+  name: string;
+  profile_image_url: string;
+  mobile_phone: string;
+  office_phone: string;
+  branch_id: string;
+  total_sold: number;
+  total_listed: number;
+  recent_sold: number;
+}
 
+export const convertAgentResponseToStorage = (agent: ResponseAgent): StorageAgent => {
+  return {
+    id: agent.id,
+    name: agent.name,
+    profile_image_url: agent.profile_image_url,
+    mobile_phone: agent.mobile_phone,
+    office_phone: agent.office_phone,
+    branch_id: agent.branch_id,
+    total_sold: agent.stats.sales,
+    total_listed: agent.stats.for_sales,
+    recent_sold: agent.sale_stats.confirmed_recent_sales.count,
+  } as StorageAgent;
+}
 
 
 export const getPageOfAgents = async (page: number): Promise<ResponseWellingtonAgents | null> => {

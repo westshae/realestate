@@ -1,23 +1,25 @@
 import { integer, numeric, pgTable, varchar } from "drizzle-orm/pg-core";
 
-const ordersTable = pgTable("orders", {
+const agentsTable = pgTable("agents", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  clientId: integer("client_id").notNull(),
-  coffeeType: varchar("coffee_type", { length: 255 }).notNull(),
-  milkType: varchar("milk_type", { length: 255 }).notNull(),
-  sugarCount: integer("sugar_count").notNull(),
-  stageNumber: integer("stage_number").notNull(),
-  stageNotified: integer("stage_notified").notNull(),
-  stageMessage: varchar("stage_message", { length: 255 }).notNull(),
-});
-
-const machinesTable = pgTable("machines", {
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  lat: numeric("lat", { precision: 9, scale: 6 }).notNull(),
-  long: numeric("long", { precision: 9, scale: 6 }).notNull(),
   name: varchar("name", { length: 255 }).notNull(),
-  version: integer("version").notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  phone: varchar("phone", { length: 20 }).notNull(),
 });
 
+const salesTable = pgTable("sales", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  agentId: integer("agent_id").notNull().references(() => agentsTable.id),
+  propertyId: integer("property_id").notNull(),
+  saleDate: varchar("sale_date", { length: 255 }).notNull(),
+  amount: numeric("amount", { precision: 10, scale: 2 }).notNull(),
+});
 
-export { ordersTable, machinesTable };
+const branchesTable = pgTable("branches", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  name: varchar("name", { length: 255 }).notNull(),
+  location: varchar("location", { length: 255 }).notNull(),
+  managerId: integer("manager_id").notNull().references(() => agentsTable.id),
+});
+
+export { agentsTable, salesTable, branchesTable };

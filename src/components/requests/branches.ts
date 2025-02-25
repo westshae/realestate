@@ -31,6 +31,31 @@ interface ResponseBranches {
   branches: ResponseBranch[];
 }
 
+export interface StorageBranch {
+  id: string;
+  role: string;
+  branch_name: string;
+  brand_name: string;
+  logo_url: string;
+  phone: string;
+  total_sales: number;
+  total_listed: number;
+}
+
+export const convertBranchResponseToStorage = (agent: ResponseBranch): StorageBranch => {
+  return {
+    id: agent.id,
+    role: agent.role,
+    branch_name: agent.branch_name,
+    brand_name: agent.brand_name,
+    logo_url: agent.logo_url,
+    phone: agent.phone,
+    total_sales: agent.stats.sales,
+    total_listed: agent.stats.for_sales,
+  } as StorageBranch;
+}
+
+
 export const getPageOfBranches = async (page: number): Promise<ResponseBranches | null> => {
   try {
     const response = await getFetchWithTor(`https://gateway.homes.co.nz/cities/100132/branches/sales?latitude=-41.293189750546695&longitude=174.77662621618384&page=${page}&filter=&sort=Sales\\`);

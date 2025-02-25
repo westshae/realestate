@@ -52,7 +52,12 @@ export async function postFetchWithTor(url: string, body: any, options = {}) {
     }
     
     // Parse the response body
-    const responseBody = await response.json();
+    let responseBody;
+    try {
+      responseBody = await response.json();
+    } catch (e) {
+      responseBody = null;
+    }
     return { response, responseBody };
   } catch (error) {
     console.error('Fetch error:', error);
