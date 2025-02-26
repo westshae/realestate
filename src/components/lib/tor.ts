@@ -73,15 +73,14 @@ export async function postFetchWithTor(url: string, body: any, options = {}) {
  */
 function rotateTorCircuit() {
   return new Promise((resolve, reject) => {
-    // This command sends an empty authentication (if you haven’t set one),
-    // then the NEWNYM signal, and finally quits.
-    const cmd = 'echo -e "AUTHENTICATE \\"\\"\nSIGNAL NEWNYM\nQUIT\n" | nc 127.0.0.1 9051';
+    // This command stops the Tor process and then starts it again
+    const cmd = 'sudo killall tor && tor &';
     exec(cmd, (error, stdout, stderr) => {
       if (error) {
         console.error('Error rotating circuit:', error);
         return reject(error);
       }
-      console.log('Tor circuit rotated:', stdout.trim());
+      console.log('Tor process restarted:', stdout.trim());
       // Wait a few seconds (e.g. 5 seconds) for Tor to build a new circuit
       setTimeout(resolve, 5000);
     });
