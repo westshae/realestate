@@ -1,14 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAllBranchesFromExternal } from '@/components/requests/branches';
-import { getAllPropertyIdsFromExternal } from '@/components/requests/propertyids';
 import { getAllPropertyDataFromExternal } from '@/components/requests/properties';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
-      // const response = await getAllBranchesFromExternal();
       const response = await getAllPropertyDataFromExternal();
-      console.log(response)
       
       return res.status(200).json(response);
     } catch (error) {

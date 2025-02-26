@@ -1,3 +1,4 @@
+import { ConsoleLogWriter } from "drizzle-orm";
 import { getFetchWithTor } from "../lib/tor";
 import { getAllPropertyIdsFromExternal } from "./propertyids";
 
@@ -133,14 +134,14 @@ export const getAllPropertyDataFromExternal = async (): Promise<StoragePropertie
 
   const propertyIds = await getAllPropertyIdsFromExternal();
 
-  propertyIds.forEach(async (id) => {
+  for (const id of propertyIds) {
     const response = await getPropertiesFromIds([id]) as any;
-    if (response && response.cards) {
-      response.cards.forEach((card: any) => {
+    if (response && response.cards && response.cards.length > 0) {
+      for (const card of response.cards) {
         if (!card) {
-          return;
+          continue;
         }
-        const property:StorageProperties = {
+        const property: StorageProperties = {
           id: card.id,
           listing_id: card.listing_id ? card.listing_id : null,
           branch_id: card.branch_id ? card.branch_id : null,
@@ -159,131 +160,10 @@ export const getAllPropertyDataFromExternal = async (): Promise<StoragePropertie
           street_number: card.property_details ? card.property_details.street_number : null,
           unit_identifier: card.property_details ? card.property_details.unit_identifier : null,
         };
-        console.log(property)
         results.push(property);
-      });
-    }
-
-  });
-
-  for (let i = 0; i < propertyIds.length; i += 4) {
-    const chunk = propertyIds.slice(i, i + 4);
-    const response = await getPropertiesFromIds(chunk) as any;
-    console.log(chunk)
-    console.log(response)
-    if (response && response.cards) {
-      console.log(response)
-      response.cards.forEach((card: any) => {
-        if (!card) {
-          return;
-        }
-        results.push({
-          id: card.id,
-          listing_id: card.listing_id ? card.listing_id : null,
-          branch_id: card.branch_id ? card.branch_id : null,
-          price: card.price,
-          url: card.url ? card.url : null,
-          address: card.property_details ? card.property_details.address : null,
-          listing_images: card.property_details && card.property_details.listing_images ? card.property_details.listing_images : null,
-          google_street_view_url: card.property_details ? card.property_details.google_street_view_url : null,
-          num_bathrooms: card.property_details ? card.property_details.num_bathrooms : null,
-          num_bedrooms: card.property_details ? card.property_details.num_bedrooms : null,
-          num_car_spaces: card.property_details ? card.property_details.num_car_spaces : null,
-          city: card.property_details ? card.property_details.city : null,
-          suburb: card.property_details ? card.property_details.suburb : null,
-          ta: card.property_details ? card.property_details.ta : null,
-          street: card.property_details ? card.property_details.street : null,
-          street_number: card.property_details ? card.property_details.street_number : null,
-          unit_identifier: card.property_details ? card.property_details.unit_identifier : null,
-        });
-      });
+      };
     }
   }
-
-  // console.log(propertyIds)
-  // propertyIds.splice(0, 3);
-  // const promises = propertyIds.map(id => getPropertiesFromIds([id]));
-  // const responses: any = await Promise.all(promises);
-  // console.log(responses[0])
-  // responses[0].cards.forEach((card: any) => {
-  //   if (!card) {
-  //     return;
-  //   }
-  //   results.push({
-  //     id: card.id,
-  //     listing_id: card.listing_id ? card.listing_id : null,
-  //     branch_id: card.branch_id ? card.branch_id : null,
-  //     price: card.price,
-  //     url: card.url ? card.url : null,
-  //     address: card.property_details ? card.property_details.address : null,
-  //     listing_images: card.property_details && card.property_details.listing_images ? card.property_details.listing_images : null,
-  //     google_street_view_url: card.property_details ? card.property_details.google_street_view_url : null,
-  //     num_bathrooms: card.property_details ? card.property_details.num_bathrooms : null,
-  //     num_bedrooms: card.property_details ? card.property_details.num_bedrooms : null,
-  //     num_car_spaces: card.property_details ? card.property_details.num_car_spaces : null,
-  //     city: card.property_details ? card.property_details.city : null,
-  //     suburb: card.property_details ? card.property_details.suburb : null,
-  //     ta: card.property_details ? card.property_details.ta : null,
-  //     street: card.property_details ? card.property_details.street : null,
-  //     street_number: card.property_details ? card.property_details.street_number : null,
-  //     unit_identifier: card.property_details ? card.property_details.unit_identifier : null,
-  //   });
-
-  // });
-
-  // responses.forEach((response: any) => {
-  //   if(response && response.cards){
-  //     // console.log(response.cards[0]);
-  //     response.cards.forEach((card: any) => {
-  //       if (!card) {
-  //         return;
-  //       }
-  //       results.push({
-  //         id: card.id,
-  //         listing_id: card.listing_id ? card.listing_id : null,
-  //         branch_id: card.branch_id ? card.branch_id : null,
-  //         price: card.price,
-  //         url: card.url ? card.url : null,
-  //         address: card.property_details ? card.property_details.address : null,
-  //         listing_images: card.property_details && card.property_details.listing_images ? card.property_details.listing_images : null,
-  //         google_street_view_url: card.property_details ? card.property_details.google_street_view_url : null,
-  //         num_bathrooms: card.property_details ? card.property_details.num_bathrooms : null,
-  //         num_bedrooms: card.property_details ? card.property_details.num_bedrooms: null,
-  //         num_car_spaces: card.property_details ? card.property_details.num_car_spaces: null,
-  //         city: card.property_details ? card.property_details.city: null,
-  //         suburb: card.property_details ? card.property_details.suburb: null,
-  //         ta: card.property_details ? card.property_details.ta : null,
-  //         street: card.property_details ? card.property_details.street: null,
-  //         street_number: card.property_details ? card.property_details.street_number : null,
-  //         unit_identifier: card.property_details ? card.property_details.unit_identifier : null,
-  //       });
-
-  //     });
-  //     // console.log(response.cards[0]);
-  //   }
-  // console.log(response);
-  // if (response && response.id) {
-  //   results.push({
-  //     id: response.id,
-  //     listing_id: response.listing_id ? response.listing_id : null,
-  //     branch_id: response.branch_id ? response.branch_id : null,
-  //     price: response.price,
-  //     url: response.url ? response.url : null,
-  //     address: response.property_details ? response.property_details.address : null,
-  //     listing_images: response.property_details && response.property_details.listing_images ? response.property_details.listing_images.split(',') : null,
-  //     google_street_view_url: response.property_details ? response.property_details.google_street_view_url : null,
-  //     num_bathrooms: response.property_details ? response.property_details.num_bathrooms : null,
-  //     num_bedrooms: response.property_details ? response.property_details.num_bedrooms: null,
-  //     num_car_spaces: response.property_details ? response.property_details.num_car_spaces: null,
-  //     city: response.property_details ? response.property_details.city: null,
-  //     suburb: response.property_details ? response.property_details.suburb: null,
-  //     ta: response.property_details ? response.property_details.ta : null,
-  //     street: response.property_details ? response.property_details.street: null,
-  //     street_number: response.property_details ? response.property_details.street_number : null,
-  //     unit_identifier: response.property_details ? response.property_details.unit_identifier : null,
-  //   });
-  // }
-  // });
 
   return results;
 }
