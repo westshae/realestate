@@ -1,10 +1,10 @@
+import { savePropertiesFromAllPolyfillsToDb } from '@/components/requests/property';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAllPropertyDataFromExternal } from '@/components/requests/properties';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === 'GET') {
     try {
-      const response = await getAllPropertyDataFromExternal();
+      const response = await savePropertiesFromAllPolyfillsToDb();
       
       return res.status(200).json(response);
     } catch (error) {
