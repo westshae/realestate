@@ -30,7 +30,9 @@ export const insertedOrExistingAgent = async (agent: AgentInsert) => {
   }).returning({ id: agents.id });
 }
 
-export const insertedOrExistingCard = async (card: InferInsertModel<typeof cards>) => {
+type CardInsert = InferInsertModel<typeof agents>;
+
+export const insertedOrExistingCard = async (card: CardInsert) => {
   return await db.insert(cards).values(card).onConflictDoUpdate({
     target: [cards.id], // The unique key that might cause conflict
     set: {id: cards.id} // No actual update, just returning the existing row

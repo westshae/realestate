@@ -43,6 +43,7 @@ const formatUrlForSearch = (url: string) => {
 const getPropertyIdFromAddress = async (formattedAddress: string, lat: number, long: number) => {
   try {
     const resolverResponse = await fetch(`https://gateway.homes.co.nz/property/resolve?address=${formattedAddress}&lat=${lat}&long=${long}`);
+
     const resolverResponseBody: { property_id: string, error: string } = await resolverResponse.json() as { property_id: string, error: string };
     return resolverResponseBody.property_id;
   } catch (error) {
@@ -62,35 +63,45 @@ export const getProperty = async (mapItem: MapItem): Promise<Card | null> => {
 
     const response = await fetch(`https://gateway.homes.co.nz/properties?property_ids=${propertyId}`);
     const text = await response.text();
-    
+
     return JSON.parse(text).cards[0] as Card;
   } catch (error) {
     return null;
   }
 }
 
-export const insertCardAndRelatedData = async (card: Card): Promise<void> => {
+export const insertCardAndRelatedData = async (card: Card): Promise<{id: string;}[] | null> => {
   if (!card.branches || card.branches.length === 0) {
-    return;
+    return null;
+  }
+
+  if (!card.agent) {
+    return null;
   }
 
   const propertyDetailsToInsert: InferInsertModel<typeof propertyDetails> = getSchemaPropertyDetailsFromCard(card);
-  const insertedPropertyDetailIds = await insertedOrExistingAgent(propertyDetailsToInsert);
+  const insertedPropertyDetailIds = await insertedOrExistingPropertyDetails(propertyDetailsToInsert);
+
+  if (insertedPropertyDetailIds.length === 0) {
+    return null;
+  }
 
   const branchToInsert: InferInsertModel<typeof branches> = getSchemaBranchesFromCard(card);
   const insertedBranchIds = await insertedOrExistingBranch(branchToInsert);
 
-  if(insertedBranchIds.length === 0) {
-    return;
+  if (insertedBranchIds.length === 0) {
+    return null;
   }
 
   const agentToInsert: InferInsertModel<typeof agents> = getSchemaAgentFromCard(card, insertedBranchIds[0].id);
-  const insertedAgentIds = await insertedOrExistingPropertyDetails(agentToInsert);
+  const insertedAgentIds = await insertedOrExistingAgent(agentToInsert);
 
-  if(insertedAgentIds.length === 0) {
-    return;
+  if (insertedAgentIds.length === 0) {
+    return null;
   }
 
-  const cardToInsert: InferInsertModel<typeof cards> = getSchemaCardFromCard(card, insertedAgentIds[0].id);
+  const cardToInsert: InferInsertModel<typeof cards> = getSchemaCardFromCard(card, insertedPropertyDetailIds[0].id);
   const insertedCardIds = await insertedOrExistingCard(cardToInsert);
+
+  return insertedCardIds;
 }
