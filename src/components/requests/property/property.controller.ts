@@ -17,12 +17,18 @@ export const savePropertiesFromAllPolyfillsToDb = async () => {
       if (!card) {
         console.log("Failed to fetch card:" + mapItem.id);
         continue;
+      } else {
+        const delay = Math.random() * 100 + 300;
+        await new Promise(resolve => setTimeout(resolve, delay));
       }
 
       const insertedCardIds = await insertCardAndRelatedData(card);
       if(insertedCardIds) {
         console.log(`${map_item_count} of ${mapItems.length}: ${card.property_details.display_address}`);
         inserted_card_count++;
+      } else {
+        const delay = Math.random() * 100 + 300;
+        await new Promise(resolve => setTimeout(resolve, delay));
       }
 
       // // Add a random delay between 0.1 to .4 seconds
