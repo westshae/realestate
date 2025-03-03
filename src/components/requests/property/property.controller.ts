@@ -16,10 +16,9 @@ export const savePropertiesFromAllPolyfillsToDb = async () => {
       const card: Card | null = await getProperty(mapItem as MapItem);
       if (!card) {
         console.log("Failed to fetch card:" + mapItem.id);
-        continue;
-      } else {
         const delay = Math.random() * 100 + 300;
         await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
       }
 
       const insertedCardIds = await insertCardAndRelatedData(card);
