@@ -1,5 +1,5 @@
 {
-  "id": "2532074f-273a-4ae4-adc0-e6f591123703",
+  "id": "d2284fc9-cecf-4373-940c-14bfca3a7227",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,96 +10,109 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "varchar",
           "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "always",
-            "name": "agents_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
+          "notNull": true
         },
         "name": {
           "name": "name",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "email": {
-          "name": "email",
-          "type": "varchar(255)",
+        "role": {
+          "name": "role",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "phone": {
-          "name": "phone",
-          "type": "varchar(20)",
+        "suburb_expert": {
+          "name": "suburb_expert",
+          "type": "boolean",
           "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.branches": {
-      "name": "branches",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "always",
-            "name": "branches_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
+          "notNull": false
         },
-        "name": {
-          "name": "name",
-          "type": "varchar(255)",
+        "suburb_expert_location": {
+          "name": "suburb_expert_location",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "location": {
-          "name": "location",
-          "type": "varchar(255)",
+        "profile_image_url": {
+          "name": "profile_image_url",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
-        "manager_id": {
-          "name": "manager_id",
-          "type": "integer",
+        "office_phone": {
+          "name": "office_phone",
+          "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
+        },
+        "mobile_phone": {
+          "name": "mobile_phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "branch_id": {
+          "name": "branch_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team": {
+          "name": "team",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "canonical_url": {
+          "name": "canonical_url",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "detail": {
+          "name": "detail",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stats": {
+          "name": "stats",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sale_stats": {
+          "name": "sale_stats",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "testimonials": {
+          "name": "testimonials",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_member_id": {
+          "name": "tm_member_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "branches_manager_id_agents_id_fk": {
-          "name": "branches_manager_id_agents_id_fk",
-          "tableFrom": "branches",
-          "tableTo": "agents",
+        "agents_branch_id_branches_id_fk": {
+          "name": "agents_branch_id_branches_id_fk",
+          "tableFrom": "agents",
+          "tableTo": "branches",
           "columnsFrom": [
-            "manager_id"
+            "branch_id"
           ],
           "columnsTo": [
             "id"
@@ -114,84 +127,332 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.properties": {
-      "name": "properties",
+    "public.branches": {
+      "name": "branches",
       "schema": "",
       "columns": {
         "id": {
           "name": "id",
-          "type": "integer",
+          "type": "varchar",
           "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "always",
-            "name": "properties_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
-        },
-        "uuid": {
-          "name": "uuid",
-          "type": "uuid",
-          "primaryKey": false,
           "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "banner_url": {
+          "name": "banner_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "branch_name": {
+          "name": "branch_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "brand_name": {
+          "name": "brand_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "banner_background_hex_colour": {
+          "name": "banner_background_hex_colour",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "logo_url": {
+          "name": "logo_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "legal_name": {
+          "name": "legal_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "canonical_url": {
+          "name": "canonical_url",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rental_partnership": {
+          "name": "rental_partnership",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "residential_partnership": {
+          "name": "residential_partnership",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_id": {
+          "name": "tm_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "detail": {
+          "name": "detail",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stats": {
+          "name": "stats",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.cards": {
+      "name": "cards",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "item_id": {
+          "name": "item_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "property_id": {
+          "name": "property_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
         },
         "listing_id": {
           "name": "listing_id",
-          "type": "varchar(255)",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_ids": {
+          "name": "tm_ids",
+          "type": "text[]",
           "primaryKey": false,
           "notNull": false
         },
         "branch_id": {
           "name": "branch_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "state": {
+          "name": "state",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sales_count": {
+          "name": "sales_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "property_details": {
+          "name": "property_details",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "point": {
+          "name": "point",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_price": {
+          "name": "display_price",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "price": {
           "name": "price",
-          "type": "numeric(10, 2)",
+          "type": "jsonb",
           "primaryKey": false,
           "notNull": false
         },
-        "url": {
-          "name": "url",
-          "type": "varchar(255)",
+        "date": {
+          "name": "date",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
+        },
+        "featured_at": {
+          "name": "featured_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "featured_plan": {
+          "name": "featured_plan",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agent_id": {
+          "name": "agent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "cards_property_id_property_details_id_fk": {
+          "name": "cards_property_id_property_details_id_fk",
+          "tableFrom": "cards",
+          "tableTo": "property_details",
+          "columnsFrom": [
+            "property_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "cards_branch_id_branches_id_fk": {
+          "name": "cards_branch_id_branches_id_fk",
+          "tableFrom": "cards",
+          "tableTo": "branches",
+          "columnsFrom": [
+            "branch_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "cards_agent_id_agents_id_fk": {
+          "name": "cards_agent_id_agents_id_fk",
+          "tableFrom": "cards",
+          "tableTo": "agents",
+          "columnsFrom": [
+            "agent_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.points": {
+      "name": "points",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
         },
         "lat": {
           "name": "lat",
-          "type": "numeric(10, 6)",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
         "long": {
           "name": "long",
-          "type": "numeric(10, 6)",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.property_details": {
+      "name": "property_details",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
         },
         "address": {
           "name": "address",
-          "type": "varchar(255)",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_address": {
+          "name": "display_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cover_image_url": {
+          "name": "cover_image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cover_image_url_source": {
+          "name": "cover_image_url_source",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
         "listing_images": {
           "name": "listing_images",
-          "type": "varchar(255)[]",
+          "type": "text[]",
           "primaryKey": false,
           "notNull": false
         },
         "google_street_view_url": {
           "name": "google_street_view_url",
-          "type": "varchar(255)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -213,135 +474,213 @@
           "primaryKey": false,
           "notNull": false
         },
-        "city": {
-          "name": "city",
-          "type": "varchar(255)",
+        "latest_bedrooms": {
+          "name": "latest_bedrooms",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "suburb": {
-          "name": "suburb",
-          "type": "varchar(255)",
+        "latest_bathrooms": {
+          "name": "latest_bathrooms",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "ta": {
-          "name": "ta",
-          "type": "varchar(255)",
+        "latest_car_spaces": {
+          "name": "latest_car_spaces",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "street": {
-          "name": "street",
-          "type": "varchar(255)",
+        "latest_source": {
+          "name": "latest_source",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "street_number": {
-          "name": "street_number",
-          "type": "varchar(255)",
+        "headline": {
+          "name": "headline",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_value_revision_date": {
+          "name": "estimated_value_revision_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_lower_value_short": {
+          "name": "display_estimated_lower_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_upper_value_short": {
+          "name": "display_estimated_upper_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_value_short": {
+          "name": "display_estimated_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_rental_revision_date": {
+          "name": "estimated_rental_revision_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_rental_lower_value_short": {
+          "name": "display_estimated_rental_lower_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_rental_upper_value_short": {
+          "name": "display_estimated_rental_upper_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_rental_yield": {
+          "name": "estimated_rental_yield",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "capital_value": {
+          "name": "capital_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "improvement_value": {
+          "name": "improvement_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "land_value": {
+          "name": "land_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_capital_value_short": {
+          "name": "display_capital_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_improvement_value_short": {
+          "name": "display_improvement_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_land_value_short": {
+          "name": "display_land_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_revision_date": {
+          "name": "current_revision_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_gas_enabled": {
+          "name": "first_gas_enabled",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flags": {
+          "name": "flags",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city_id": {
+          "name": "city_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "suburb_id": {
+          "name": "suburb_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_suburb_id": {
+          "name": "tm_suburb_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_region_id": {
+          "name": "tm_region_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_district_id": {
+          "name": "tm_district_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
         "unit_identifier": {
           "name": "unit_identifier",
-          "type": "varchar(255)",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street_number": {
+          "name": "street_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street_alpha": {
+          "name": "street_alpha",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street": {
+          "name": "street",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "suburb": {
+          "name": "suburb",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ta": {
+          "name": "ta",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "properties_branch_id_branches_id_fk": {
-          "name": "properties_branch_id_branches_id_fk",
-          "tableFrom": "properties",
-          "tableTo": "branches",
-          "columnsFrom": [
-            "branch_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "properties_uuid_unique": {
-          "name": "properties_uuid_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "uuid"
-          ]
-        }
-      },
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.sales": {
-      "name": "sales",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "identity": {
-            "type": "always",
-            "name": "sales_id_seq",
-            "schema": "public",
-            "increment": "1",
-            "startWith": "1",
-            "minValue": "1",
-            "maxValue": "2147483647",
-            "cache": "1",
-            "cycle": false
-          }
-        },
-        "agent_id": {
-          "name": "agent_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "property_id": {
-          "name": "property_id",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "sale_date": {
-          "name": "sale_date",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "amount": {
-          "name": "amount",
-          "type": "numeric(10, 2)",
-          "primaryKey": false,
-          "notNull": true
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "sales_agent_id_agents_id_fk": {
-          "name": "sales_agent_id_agents_id_fk",
-          "tableFrom": "sales",
-          "tableTo": "agents",
-          "columnsFrom": [
-            "agent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
