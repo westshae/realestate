@@ -1,5 +1,5 @@
 {
-  "id": "d2284fc9-cecf-4373-940c-14bfca3a7227",
+  "id": "02567507-a9ba-4fdc-bf0c-081e9b29cc42",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -106,21 +106,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "agents_branch_id_branches_id_fk": {
-          "name": "agents_branch_id_branches_id_fk",
-          "tableFrom": "agents",
-          "tableTo": "branches",
-          "columnsFrom": [
-            "branch_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -332,47 +318,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "cards_property_id_property_details_id_fk": {
-          "name": "cards_property_id_property_details_id_fk",
-          "tableFrom": "cards",
-          "tableTo": "property_details",
-          "columnsFrom": [
-            "property_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "cards_branch_id_branches_id_fk": {
-          "name": "cards_branch_id_branches_id_fk",
-          "tableFrom": "cards",
-          "tableTo": "branches",
-          "columnsFrom": [
-            "branch_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "cards_agent_id_agents_id_fk": {
-          "name": "cards_agent_id_agents_id_fk",
-          "tableFrom": "cards",
-          "tableTo": "agents",
-          "columnsFrom": [
-            "agent_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},

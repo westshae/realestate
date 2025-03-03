@@ -106,8 +106,3 @@ CREATE TABLE "property_details" (
 	"city" text,
 	"ta" text
 );
---> statement-breakpoint
-ALTER TABLE "agents" ADD CONSTRAINT "agents_branch_id_branches_id_fk" FOREIGN KEY ("branch_id") REFERENCES "public"."branches"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "cards" ADD CONSTRAINT "cards_property_id_property_details_id_fk" FOREIGN KEY ("property_id") REFERENCES "public"."property_details"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "cards" ADD CONSTRAINT "cards_branch_id_branches_id_fk" FOREIGN KEY ("branch_id") REFERENCES "public"."branches"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "cards" ADD CONSTRAINT "cards_agent_id_agents_id_fk" FOREIGN KEY ("agent_id") REFERENCES "public"."agents"("id") ON DELETE no action ON UPDATE no action;

@@ -97,19 +97,19 @@ export const getSchemaCardFromCard = (card: Card, propertyDetailId: string): Inf
   return {
     id: card.id,
     itemId: card.item_id,
-    propertyId: propertyDetailId,
+    propertyId: propertyDetailId ? propertyDetailId : null,
     listingId: card.listing_id,
     tmIds: card.tm_ids,
-    branchId: card.branch_id,
+    branchId: card.branch_id ? card.branch_id : null,
     state: card.state,
     salesCount: card.sales_count,
-    propertyDetails: card.property_details,
+    propertyDetails: card.property_details ? card.property_details : null,
     point: card.point,
     displayPrice: card.display_price,
     price: card.price,
     date: new Date(card.date),
     featuredAt: new Date(card.featured_at),
     featuredPlan: card.featured_plan,
-    agentId: card.agent.id,
+    agentId: card.agent ? card.agent.id : null,
   };
 }

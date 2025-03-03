@@ -70,38 +70,34 @@ export const getProperty = async (mapItem: MapItem): Promise<Card | null> => {
   }
 }
 
-export const insertCardAndRelatedData = async (card: Card): Promise<{id: string;}[] | null> => {
-  if (!card.branches || card.branches.length === 0) {
+export const insertCardAndRelatedData = async (card: Card): Promise<{ id: string; }[] | null> => {
+  try {
+    let insertedPropertyDetailIds: { id: string; }[] = [];
+    if (card.property_details) {
+      const propertyDetailsToInsert: InferInsertModel<typeof propertyDetails> = getSchemaPropertyDetailsFromCard(card);
+      insertedPropertyDetailIds = await insertedOrExistingPropertyDetails(propertyDetailsToInsert);
+    }
+
+    if (card.branches && card.branches.length > 0) {
+      const branchToInsert: InferInsertModel<typeof branches> = getSchemaBranchesFromCard(card);
+      var insertedBranchIds = await insertedOrExistingBranch(branchToInsert);
+    } else {
+      insertedBranchIds = [];
+    }
+
+    let insertedAgentIds = [];
+    if (insertedBranchIds.length > 0) {
+      const agentToInsert: InferInsertModel<typeof agents> = getSchemaAgentFromCard(card, insertedBranchIds[0].id);
+      insertedAgentIds = await insertedOrExistingAgent(agentToInsert);
+    }
+
+    const cardToInsert: InferInsertModel<typeof cards> = getSchemaCardFromCard(card, insertedPropertyDetailIds[0].id);
+    const insertedCardIds = await insertedOrExistingCard(cardToInsert);
+
+    return insertedCardIds;
+  } catch (error) {
+    console.log("FAILED")
+    console.log(error)
     return null;
   }
-
-  if (!card.agent) {
-    return null;
-  }
-
-  const propertyDetailsToInsert: InferInsertModel<typeof propertyDetails> = getSchemaPropertyDetailsFromCard(card);
-  const insertedPropertyDetailIds = await insertedOrExistingPropertyDetails(propertyDetailsToInsert);
-
-  if (insertedPropertyDetailIds.length === 0) {
-    return null;
-  }
-
-  const branchToInsert: InferInsertModel<typeof branches> = getSchemaBranchesFromCard(card);
-  const insertedBranchIds = await insertedOrExistingBranch(branchToInsert);
-
-  if (insertedBranchIds.length === 0) {
-    return null;
-  }
-
-  const agentToInsert: InferInsertModel<typeof agents> = getSchemaAgentFromCard(card, insertedBranchIds[0].id);
-  const insertedAgentIds = await insertedOrExistingAgent(agentToInsert);
-
-  if (insertedAgentIds.length === 0) {
-    return null;
-  }
-
-  const cardToInsert: InferInsertModel<typeof cards> = getSchemaCardFromCard(card, insertedPropertyDetailIds[0].id);
-  const insertedCardIds = await insertedOrExistingCard(cardToInsert);
-
-  return insertedCardIds;
 }
