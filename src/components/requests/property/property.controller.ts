@@ -4,6 +4,8 @@ import { getMapItemsFromPolyfills, getProperty, insertCardAndRelatedData } from 
 
 export const savePropertiesFromAllPolyfillsToDb = async () => {
   const polyfillSuccessMessages = [];
+  let totalAttemptedSaves = 0;
+  let totalSuccessfulSaves = 0;
   for (const polyfill of polyfills) {
     const mapItems: MapItem[] = await getMapItemsFromPolyfills(polyfill);
 
@@ -30,9 +32,12 @@ export const savePropertiesFromAllPolyfillsToDb = async () => {
     const polyfillSuccessMessage = `Inserted ${inserted_card_count} of ${map_item_count} map items for polyfill ${polyfill}`;
     console.log(polyfillSuccessMessage);
     polyfillSuccessMessages.push(polyfillSuccessMessage);
+    totalAttemptedSaves += map_item_count;
+    totalSuccessfulSaves += inserted_card_count;
   }
 
   for (const message of polyfillSuccessMessages) {
     console.log(message);
   }
+  console.log(`Total successful:attempted saves: ${totalAttemptedSaves}:${totalSuccessfulSaves}`);
 }
