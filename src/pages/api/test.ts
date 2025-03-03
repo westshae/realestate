@@ -1,4 +1,4 @@
-import { savePropertiesFromAllPolyfillsToDb } from '@/components/requests/property';
+import { savePropertiesFromAllPolyfillsToDb } from '@/components/requests/property/property.controller';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
