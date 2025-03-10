@@ -1,8 +1,54 @@
+import { cards, propertyDetails } from "@/db/schema";
 import { polyfills } from "./polyfill";
-import { MapItem, Card } from "./property.models";
-import { getMapItemsFromPolyfills, getProperty, insertCardAndRelatedData } from "./property.services";
+import { MapItem, Card, PropertyDetails } from "./property.models";
+import { getMapItemsFromPolyfills, getProperty, getPropertyDetails, insertCardAndRelatedData } from "./property.services";
+import { db } from "@/db";
+import { getSchemaPropertyDetailsFromPropertyDetails } from "./property.map";
+import { InferInsertModel } from "drizzle-orm";
+import { updateExistingPropertyDetails } from "./property.repos";
+
+export const updateAllPropertyDetailsToDb = async () => {
+  if (!process.env.LOCAL) {
+    return;
+  }
+  const ids = (await db.select({ id: cards.propertyId }).from(cards)).map(card => card.id);
+  const totalIds = ids.length;
+  let successIds = 0;
+  for (const id of ids) {
+    try {
+      if(!id) {
+        continue;
+      }
+      const details: PropertyDetails | null = await Promise.race<PropertyDetails | null>([
+        getPropertyDetails(id),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 5000))
+      ]);
+
+      
+
+      const delay = Math.random() * 100 + 150;
+      await new Promise(resolve => setTimeout(resolve, delay));
+
+      if (!details) {
+        console.log("details lack failure")
+        continue;
+      }
+      const propertyDetailsToInsert: InferInsertModel<typeof propertyDetails> = getSchemaPropertyDetailsFromPropertyDetails(id, details);
+      updateExistingPropertyDetails(id, propertyDetailsToInsert);
+      successIds++;
+      console.log("Id updated: ", id, ":", successIds, ":", totalIds);
+    } catch (error) {
+      const delay = Math.random() * 1000 + 3000;
+      await new Promise(resolve => setTimeout(resolve, delay));
+      continue;
+    }
+  }
+}
 
 export const savePropertiesFromAllPolyfillsToDb = async () => {
+  if (!process.env.LOCAL) {
+    return;
+  }
   const polyfillSuccessMessages = [];
   let totalAttemptedSaves = 0;
   let totalSuccessfulSaves = 0;
@@ -20,19 +66,24 @@ export const savePropertiesFromAllPolyfillsToDb = async () => {
         continue;
       }
 
-      const insertedCardIds = await Promise.race([
-        insertCardAndRelatedData(card),
-        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 3000))
-      ]);
-      if (insertedCardIds) {
-        console.log(`${map_item_count} of ${mapItems.length}: ${card.property_details.display_address}`);
-        inserted_card_count++;
-      }
+      try {
+        const insertedCardIds = await Promise.race([
+          insertCardAndRelatedData(card),
+          new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 5000))
+        ]);
+        if (insertedCardIds) {
+          console.log(`${map_item_count} of ${mapItems.length}: ${card.property_details.display_address}`);
+          inserted_card_count++;
+        }
 
-      // Add a random delay between 0.1 to .4 seconds
-      // const delayPoint4Second = Math.random() * 1000;
-      const delay = Math.random() * 100 + 300;
-      await new Promise(resolve => setTimeout(resolve, delay));
+        // Add a random delay between 0.1 to .4 seconds
+        // const delayPoint4Second = Math.random() * 1000;
+        const delay = Math.random() * 100 + 150;
+        await new Promise(resolve => setTimeout(resolve, delay));
+      } catch (error) {
+        console.log("Timeout error for card:" + card.property_details.display_address);
+        continue;
+      }
     }
     const polyfillSuccessMessage = `Inserted ${inserted_card_count} of ${map_item_count} map items for polyfill ${polyfill}`;
     console.log(polyfillSuccessMessage)

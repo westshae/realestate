@@ -1,7 +1,7 @@
 import { propertyDetails, branches, agents, cards } from "@/db/schema";
 import { InferInsertModel } from "drizzle-orm";
 import { getSchemaPropertyDetailsFromCard, getSchemaBranchesFromCard, getSchemaAgentFromCard, getSchemaCardFromCard } from "./property.map";
-import { Card, MapItem } from "./property.models";
+import { Card, MapItem, PropertyDetails } from "./property.models";
 import { insertedOrExistingAgent, insertedOrExistingBranch, insertedOrExistingPropertyDetails, insertedOrExistingCard } from "./property.repos";
 
 
@@ -51,6 +51,16 @@ const getPropertyIdFromAddress = async (formattedAddress: string, lat: number, l
     return null;
   }
 }
+
+export const getPropertyDetails = async (id: string): Promise<PropertyDetails | null> => {
+  try {
+    const response = await fetch(`https://api-gateway.homes.co.nz/details?property_id=${id}`);
+    const text = await response.text();
+    return JSON.parse(text).property as PropertyDetails;
+  } catch (error) {
+    return null;
+  }
+} 
 
 export const getProperty = async (mapItem: MapItem): Promise<Card | null> => {
   try {

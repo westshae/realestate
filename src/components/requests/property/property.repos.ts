@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { InferInsertModel } from "drizzle-orm";
+import { eq, InferInsertModel } from "drizzle-orm";
 import { agents, branches, cards, propertyDetails } from "@/db/schema";
 
 type PropertyDetailsInsert = InferInsertModel<typeof propertyDetails>;
@@ -10,6 +10,10 @@ export const insertedOrExistingPropertyDetails = async (propertyDetailsInsert: P
     target: [propertyDetails.id], // The unique key that might cause conflict
     set: {id: propertyDetails.id} // No actual update, just returning the existing row
   }).returning({ id: propertyDetails.id });
+}
+
+export const updateExistingPropertyDetails = async (id: string, updates: Partial<PropertyDetailsInsert>) => {
+  return await db.update(propertyDetails).set(updates).where(eq(propertyDetails.id, id)).returning();
 }
 
 type BranchInsert = InferInsertModel<typeof branches>;

@@ -1,6 +1,6 @@
 {
-  "id": "4b256e1e-ce94-4cbc-aeca-9af3454bb7bf",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "880bb25b-330b-476f-8ad7-d6a26ed7aa6c",
+  "prevId": "4b256e1e-ce94-4cbc-aeca-9af3454bb7bf",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -621,6 +621,312 @@
         "ta": {
           "name": "ta",
           "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "property_id": {
+          "name": "property_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "decade_built": {
+          "name": "decade_built",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "building_construction": {
+          "name": "building_construction",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "building_condition": {
+          "name": "building_condition",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "floor_area": {
+          "name": "floor_area",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "land_area": {
+          "name": "land_area",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "has_deck": {
+          "name": "has_deck",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "view_type": {
+          "name": "view_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "view_scope": {
+          "name": "view_scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "zone": {
+          "name": "zone",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "trees": {
+          "name": "trees",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contour": {
+          "name": "contour",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mass_total_living_area": {
+          "name": "mass_total_living_area",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "legal_description": {
+          "name": "legal_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category_code": {
+          "name": "category_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "certificate_of_title": {
+          "name": "certificate_of_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "valuation_reference_number": {
+          "name": "valuation_reference_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "land_use": {
+          "name": "land_use",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_lower_value": {
+          "name": "estimated_lower_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_upper_value": {
+          "name": "estimated_upper_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_value": {
+          "name": "estimated_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_rental_lower_value": {
+          "name": "estimated_rental_lower_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_rental_upper_value": {
+          "name": "estimated_rental_upper_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bath_estimate": {
+          "name": "bath_estimate",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bath_estimate_date": {
+          "name": "bath_estimate_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bed_estimate": {
+          "name": "bed_estimate",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bed_estimate_date": {
+          "name": "bed_estimate_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "suburb_name": {
+          "name": "suburb_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city_name": {
+          "name": "city_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "claim_id": {
+          "name": "claim_id",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "claimed": {
+          "name": "claimed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_events": {
+          "name": "user_events",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_lower_value": {
+          "name": "display_estimated_lower_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_upper_value": {
+          "name": "display_estimated_upper_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_value": {
+          "name": "display_estimated_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_rental_lower_value": {
+          "name": "display_estimated_rental_lower_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_rental_upper_value": {
+          "name": "display_estimated_rental_upper_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "building_site_coverage": {
+          "name": "building_site_coverage",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mass_garage_freestanding": {
+          "name": "mass_garage_freestanding",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mass_garage_under_roof": {
+          "name": "mass_garage_under_roof",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solar": {
+          "name": "solar",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "capital_value_digit": {
+          "name": "capital_value_digit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "improvement_value_digit": {
+          "name": "improvement_value_digit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "land_value_digit": {
+          "name": "land_value_digit",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_capital_value": {
+          "name": "display_capital_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_improvement_value": {
+          "name": "display_improvement_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_land_value": {
+          "name": "display_land_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image_urls": {
+          "name": "image_urls",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "images": {
+          "name": "images",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "video_urls": {
+          "name": "video_urls",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "core_logic_id": {
+          "name": "core_logic_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": false
         }
