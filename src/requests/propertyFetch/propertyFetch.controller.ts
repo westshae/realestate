@@ -38,7 +38,7 @@ export const getAllPropertyPriceEstimationHistory = async () => {
       successIds++;
       console.log("Id updated: ", id, ":", successIds, ":", totalIds);
 
-    } catch (error) {
+    } catch {
       const delay = Math.random() * 1000 + 3000;
       await new Promise(resolve => setTimeout(resolve, delay));
       continue;
@@ -77,7 +77,7 @@ export const updateAllPropertyDetailsToDb = async () => {
       updateExistingPropertyDetails(id, propertyDetailsToInsert);
       successIds++;
       console.log("Id updated: ", id, ":", successIds, ":", totalIds);
-    } catch (error) {
+    } catch {
       const delay = Math.random() * 1000 + 3000;
       await new Promise(resolve => setTimeout(resolve, delay));
       continue;
@@ -120,7 +120,7 @@ export const savePropertiesFromAllPolyfillsToDb = async () => {
         // const delayPoint4Second = Math.random() * 1000;
         const delay = Math.random() * 100 + 150;
         await new Promise(resolve => setTimeout(resolve, delay));
-      } catch (error) {
+      } catch {
         console.log("Timeout error for card:" + card.property_details.display_address);
         continue;
       }

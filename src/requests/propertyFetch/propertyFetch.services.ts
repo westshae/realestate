@@ -1,7 +1,7 @@
 import { propertyDetails, branches, agents, cards } from "@/db/schema";
 import { InferInsertModel } from "drizzle-orm";
 import { getSchemaPropertyDetailsFromCard, getSchemaBranchesFromCard, getSchemaAgentFromCard, getSchemaCardFromCard } from "./propertyFetch.map";
-import { Card, MapItem, PropertyDetails, PropertyEstimateHistory } from "./propertyFetch.models";
+import { Card, MapItem, PropertyDetails } from "./propertyFetch.models";
 import { insertedOrExistingAgent, insertedOrExistingBranch, insertedOrExistingPropertyDetails, insertedOrExistingCard } from "./propertyFetch.repos";
 
 
@@ -46,8 +46,8 @@ const getPropertyIdFromAddress = async (formattedAddress: string, lat: number, l
 
     const resolverResponseBody: { property_id: string, error: string } = await resolverResponse.json() as { property_id: string, error: string };
     return resolverResponseBody.property_id;
-  } catch (error) {
-    console.log("Failed to resolve property id for address:", formattedAddress);
+  } catch {
+    console.error("Failed to resolve property id for address:", formattedAddress);
     return null;
   }
 }
@@ -57,7 +57,7 @@ export const getPropertyDetails = async (id: string): Promise<PropertyDetails | 
     const response = await fetch(`https://api-gateway.homes.co.nz/details?property_id=${id}`);
     const text = await response.text();
     return JSON.parse(text).property as PropertyDetails;
-  } catch (error) {
+  } catch {
     return null;
   }
 } 
@@ -67,7 +67,7 @@ export const getPropertyPriceEstimateHistory = async (id: string): Promise<JSON 
     const response = await fetch(`https://gateway.homes.co.nz/estimate/history/${id}`);
     const text = await response.text();
     return JSON.parse(text);
-  } catch (error) {
+  } catch {
     return null;
   }
 } 
@@ -86,7 +86,7 @@ export const getProperty = async (mapItem: MapItem): Promise<Card | null> => {
     const text = await response.text();
 
     return JSON.parse(text).cards[0] as Card;
-  } catch (error) {
+  } catch {
     return null;
   }
 }
@@ -99,26 +99,23 @@ export const insertCardAndRelatedData = async (card: Card): Promise<{ id: string
       insertedPropertyDetailIds = await insertedOrExistingPropertyDetails(propertyDetailsToInsert);
     }
 
+    let insertedBranchIds: {id: string}[] = [];
     if (card.branches && card.branches.length > 0) {
       const branchToInsert: InferInsertModel<typeof branches> = getSchemaBranchesFromCard(card);
-      var insertedBranchIds = await insertedOrExistingBranch(branchToInsert);
-    } else {
-      insertedBranchIds = [];
+      insertedBranchIds = await insertedOrExistingBranch(branchToInsert);
     }
 
-    let insertedAgentIds = [];
     if (insertedBranchIds.length > 0) {
       const agentToInsert: InferInsertModel<typeof agents> = getSchemaAgentFromCard(card, insertedBranchIds[0].id);
-      insertedAgentIds = await insertedOrExistingAgent(agentToInsert);
+      await insertedOrExistingAgent(agentToInsert);
     }
 
     const cardToInsert: InferInsertModel<typeof cards> = getSchemaCardFromCard(card, insertedPropertyDetailIds[0].id);
     const insertedCardIds = await insertedOrExistingCard(cardToInsert);
 
     return insertedCardIds;
-  } catch (error) {
+  } catch {
     console.log("FAILED")
-    console.log(error)
     return null;
   }
 }

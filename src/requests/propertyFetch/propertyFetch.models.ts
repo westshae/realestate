@@ -9,11 +9,11 @@ interface Branch {
   legal_name: string;
   phone: string;
   canonical_url: string[];
-  rental_partnership: any;
-  residential_partnership: any;
+  rental_partnership: string;
+  residential_partnership: string;
   tm_id: string;
-  detail: any;
-  stats: any;
+  detail: string;
+  stats: string;
 }
 
 interface PropertyDetails {
@@ -53,9 +53,9 @@ interface PropertyDetails {
   tm_suburb_id: number;
   tm_region_id: number;
   tm_district_id: number;
-  unit_identifier: any;
+  unit_identifier: string;
   street_number: string;
-  street_alpha: any;
+  street_alpha: string;
   street: string;
   suburb: string;
   city: string;
@@ -69,10 +69,10 @@ interface PropertyDetails {
   has_deck: boolean;
   view_type: string;
   view_scope: string;
-  zone: any;
-  trees: any;
+  zone: string;
+  trees: string;
   contour: string;
-  mass_total_living_area: any;
+  mass_total_living_area: string;
   legal_description: string;
   category_code: string;
   certificate_of_title: string;
@@ -89,27 +89,27 @@ interface PropertyDetails {
   bed_estimate_date: string;
   suburb_name: string;
   city_name: string;
-  claim_id: any;
+  claim_id: string;
   claimed: boolean;
-  user_events: any;
+  user_events: string;
   display_estimated_lower_value: string;
   display_estimated_upper_value: string;
   display_estimated_value: string;
   display_estimated_rental_lower_value: string;
   display_estimated_rental_upper_value: string;
-  building_site_coverage: any;
-  mass_garage_freestanding: any;
-  mass_garage_under_roof: any;
-  solar: any;
+  building_site_coverage: string;
+  mass_garage_freestanding: string;
+  mass_garage_under_roof: string;
+  solar: string;
   capital_value_digit: string;
   improvement_value_digit: string;
   land_value_digit: string;
   display_capital_value: string;
   display_improvement_value: string;
   display_land_value: string;
-  image_urls: any;
-  images: any;
-  video_urls: any;
+  image_urls: string;
+  images: string;
+  video_urls: string;
   core_logic_id: number;
 }
 
@@ -127,10 +127,10 @@ interface Agent {
   branch: Branch;
   team: boolean;
   canonical_url: string[];
-  detail: any;
+  detail: string;
   stats: Record<string, number>;
-  sale_stats: Record<string, any>;
-  testimonials: any;
+  sale_stats: Record<string, string>;
+  testimonials: string;
   tm_member_id: string;
 }
 
@@ -153,7 +153,7 @@ interface Card {
   property_details: PropertyDetails;
   point: Point;
   display_price: string;
-  price: any;
+  price: string;
   date: string;
   featured_at: string;
   featured_plan: number;

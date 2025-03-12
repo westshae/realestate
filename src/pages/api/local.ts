@@ -1,4 +1,4 @@
-import { getAllPropertyPriceEstimationHistory, savePropertiesFromAllPolyfillsToDb, updateAllPropertyDetailsToDb } from '@/requests/propertyFetch/propertyFetch.controller';
+import { getAllPropertyPriceEstimationHistory } from '@/requests/propertyFetch/propertyFetch.controller';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
