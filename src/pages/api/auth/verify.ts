@@ -2,11 +2,8 @@ import { verifyToken } from '@/requests/auth/auth.services';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') {
+  if (req.method === 'POST') {
     try {
-      if (!process.env.LOCAL) {
-        return;
-      }
       const { email, token } = req.body;
 
       if (typeof email !== 'string' || typeof token !== 'string') {

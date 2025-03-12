@@ -2,11 +2,12 @@ import { registerAccount } from '@/requests/auth/auth.services';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method === 'GET') {
+  if (req.method === 'POST') {
     try {
       if (!process.env.LOCAL) {
         return;
       }
+
       const { email, password, isAdmin } = req.body;
 
       if (typeof email !== 'string' || typeof password !== 'string' || typeof isAdmin !== 'boolean') {

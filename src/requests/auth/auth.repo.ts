@@ -9,6 +9,8 @@ export const getUserByEmail = async (email: string): Promise<UserModel | null> =
   return user[0] || null;
 }
 
-export const addUser = async (email: string, hashedPassword: string, isAdmin: boolean = false): Promise<void> => {
+export const addUser = async (email: string, hashedPassword: string, isAdmin: boolean = false): Promise<string | null> => {
   await db.insert(users).values({ email, hashedPassword, isAdmin });
+  const user = await db.select().from(users).where(eq(users.email, email)).limit(1);
+  return user[0].email || null;
 }

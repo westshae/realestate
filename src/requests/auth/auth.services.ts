@@ -7,7 +7,7 @@ const hashPassword = async (password: string): Promise<string> => {
   return await hash(password, 10);
 }
 
-export async function registerAccount(email: string, password: string, isAdmin: boolean): Promise<void> {
+export async function registerAccount(email: string, password: string, isAdmin: boolean): Promise<string | null> {
   const hashedPassword = await hashPassword(password);
   return await addUser(email, hashedPassword, isAdmin);
 }
