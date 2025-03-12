@@ -28,7 +28,7 @@ const AuthPage: React.FC = () => {
         body: JSON.stringify(data),
       });
       if (response.ok) {
-        const result = await response.json();
+        await response.json();
         setIsRegisterSuccess(true);
       } else {
         setIsRegisterError(true);
