@@ -164,7 +164,8 @@ export const cards = pgTable("cards", {
   featuredAt: timestamp("featured_at"),
   featuredPlan: integer("featured_plan"),
   agentId: varchar("agent_id"),
-  propertyEstimateHistory: jsonb("property_estimate_history")
+  propertyEstimateHistory: jsonb("property_estimate_history"),
+  propertySalesValuationHistory: jsonb("property_sales_valuation_history")
 });
 
 // Users Table

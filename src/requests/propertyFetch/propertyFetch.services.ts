@@ -72,6 +72,16 @@ export const getPropertyPriceEstimateHistory = async (id: string): Promise<JSON 
   }
 } 
 
+export const getPropertySaleValuationHistory = async (id: string): Promise<JSON | null> => {
+  try {
+    const response = await fetch(`https://gateway.homes.co.nz/property/${id}/timeline`);
+    const text = await response.text();
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+} 
+
 
 export const getProperty = async (mapItem: MapItem): Promise<Card | null> => {
   try {

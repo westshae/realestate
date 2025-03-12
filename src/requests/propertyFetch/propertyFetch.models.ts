@@ -159,6 +159,8 @@ interface Card {
   featured_plan: number;
   agent: Agent;
   agents: Agent[];
+  propertyEstimateHistory: string;
+  propertySalesValuationHistory: string;
 }
 
 interface MapItem {
@@ -174,16 +176,7 @@ interface MapItem {
   display_street_number: string;
 }
 
-interface PropertyEstimateHistory {
-  date: string;
-  estimate: number;
-  low_estimate: number;
-  high_estimate: number;
-  display_estimate: string;
-  display_low_estimate: string;
-  display_high_estimate: string;
-}
 
 
 
-export type { PropertyEstimateHistory, Branch, PropertyDetails, Agent, Point, Card, MapItem };
+export type { Branch, PropertyDetails, Agent, Point, Card, MapItem };

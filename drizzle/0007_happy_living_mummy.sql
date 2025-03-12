@@ -1,0 +1,1 @@
+ALTER TABLE "cards" ADD COLUMN "property_sales_valuation_history" jsonb;

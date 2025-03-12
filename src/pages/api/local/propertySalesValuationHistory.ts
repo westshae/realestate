@@ -1,4 +1,4 @@
-import { getAllPropertyPriceEstimationHistory } from '@/requests/propertyFetch/propertyFetch.controller';
+import { getAllPropertySalesValuationHistory } from '@/requests/propertyFetch/propertyFetch.controller';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       if (!process.env.LOCAL) {
         return;
       }
-      const response = await getAllPropertyPriceEstimationHistory();
+      const response = await getAllPropertySalesValuationHistory();
       
       return res.status(200).json(response);
     } catch (error) {

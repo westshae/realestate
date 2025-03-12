@@ -1,11 +1,52 @@
 import { cards, propertyDetails } from "@/db/schema";
 import { polyfills } from "./polyfill";
 import { MapItem, Card, PropertyDetails } from "./propertyFetch.models";
-import { getMapItemsFromPolyfills, getProperty, getPropertyDetails, getPropertyPriceEstimateHistory, insertCardAndRelatedData } from "./propertyFetch.services";
+import { getMapItemsFromPolyfills, getProperty, getPropertyDetails, getPropertyPriceEstimateHistory, getPropertySaleValuationHistory, insertCardAndRelatedData } from "./propertyFetch.services";
 import { db } from "@/db";
 import { getSchemaPropertyDetailsFromPropertyDetails } from "./propertyFetch.map";
 import { InferInsertModel } from "drizzle-orm";
-import { updateCardsWithPropertyEstimateHistory, updateExistingPropertyDetails } from "./propertyFetch.repos";
+import { updateCardsWithPropertyEstimateHistory, updateCardsWithPropertySalesValuationHistory, updateExistingPropertyDetails } from "./propertyFetch.repos";
+
+export const getAllPropertySalesValuationHistory = async () => {
+  if (!process.env.LOCAL) {
+    return;
+  }
+  const ids = (await db.select({ id: cards.propertyId }).from(cards)).map(card => card.id);
+  const totalIds = ids.length;
+  let successIds = 0;
+  for (const id of ids) {
+    try {
+      if(!id) {
+        continue;
+      }
+      const salesValuationHistory: JSON | null = await Promise.race<JSON | null>([
+        getPropertySaleValuationHistory(id),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 5000))
+      ]);
+
+      
+
+      const delay = Math.random() * 100 + 150;
+      await new Promise(resolve => setTimeout(resolve, delay));
+
+      if (!salesValuationHistory) {
+        console.log("salesValuationHistory lack failure")
+        continue;
+      }
+      updateCardsWithPropertySalesValuationHistory(id, salesValuationHistory);
+
+      successIds++;
+      console.log("Id updated: ", id, ":", successIds, ":", totalIds);
+
+    } catch {
+      const delay = Math.random() * 1000 + 3000;
+      await new Promise(resolve => setTimeout(resolve, delay));
+      continue;
+    }
+  }
+
+}
+
 
 export const getAllPropertyPriceEstimationHistory = async () => {
   if (!process.env.LOCAL) {

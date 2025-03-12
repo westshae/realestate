@@ -46,3 +46,8 @@ export const insertedOrExistingCard = async (card: CardInsert): Promise<{ id: st
 export const updateCardsWithPropertyEstimateHistory = async (cardId: string, propertyEstimateHistory: JSON): Promise<{ id: string }[]> => {
   return await db.update(cards).set({ propertyEstimateHistory: propertyEstimateHistory }).where(eq(cards.id, cardId)).returning({id: cards.id});
 }
+
+
+export const updateCardsWithPropertySalesValuationHistory = async (cardId: string, propertySalesValuationHistory: JSON): Promise<{ id: string }[]> => {
+  return await db.update(cards).set({ propertySalesValuationHistory: propertySalesValuationHistory }).where(eq(cards.id, cardId)).returning({id: cards.id});
+}
