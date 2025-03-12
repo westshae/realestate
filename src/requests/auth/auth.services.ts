@@ -3,8 +3,6 @@ import { verify, sign, JwtPayload } from 'jsonwebtoken';
 import { addUser, getUserByEmail } from './auth.repo';
 import { Login } from './auth.models';
 
-const secretKey = 'your_secret_key';
-
 const hashPassword = async (password: string): Promise<string> => {
   return await hash(password, 10);
 }
@@ -22,11 +20,20 @@ export async function loginAccount({ providedEmail, providedPassword }: Login): 
     return null;
   }
 
-  return sign({ email: dbUser.email }, secretKey, { expiresIn: '1h' });
+  const secretKey = process.env.AUTH_SECRET_KEY;
+  if (!secretKey) {
+    throw new Error('AUTH_SECRET_KEY is not defined');
+  }
+  return sign({ email: dbUser.email }, secretKey, { expiresIn: '7d' });
 }
 
 export function decodeToken(token: string): JwtPayload | null {
   try {
+    const secretKey = process.env.AUTH_SECRET_KEY;
+    if (!secretKey) {
+      throw new Error('AUTH_SECRET_KEY is not defined');
+    }
+  
     const decoded = verify(token, secretKey);
     return decoded as JwtPayload;
   } catch {
