@@ -1,11 +1,11 @@
 import { cards, propertyDetails } from "@/db/schema";
 import { polyfills } from "./polyfill";
-import { MapItem, Card, PropertyDetails } from "./property.models";
-import { getMapItemsFromPolyfills, getProperty, getPropertyDetails, getPropertyPriceEstimateHistory, insertCardAndRelatedData } from "./property.services";
+import { MapItem, Card, PropertyDetails } from "./propertyFetch.models";
+import { getMapItemsFromPolyfills, getProperty, getPropertyDetails, getPropertyPriceEstimateHistory, insertCardAndRelatedData } from "./propertyFetch.services";
 import { db } from "@/db";
-import { getSchemaPropertyDetailsFromPropertyDetails } from "./property.map";
+import { getSchemaPropertyDetailsFromPropertyDetails } from "./propertyFetch.map";
 import { InferInsertModel } from "drizzle-orm";
-import { updateCardsWithPropertyEstimateHistory, updateExistingPropertyDetails } from "./property.repos";
+import { updateCardsWithPropertyEstimateHistory, updateExistingPropertyDetails } from "./propertyFetch.repos";
 
 export const getAllPropertyPriceEstimationHistory = async () => {
   if (!process.env.LOCAL) {

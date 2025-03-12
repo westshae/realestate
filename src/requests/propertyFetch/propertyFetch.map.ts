@@ -1,6 +1,6 @@
 import { agents, branches, cards, propertyDetails } from "@/db/schema";
 import { InferInsertModel } from "drizzle-orm";
-import { Card, PropertyDetails, PropertyEstimateHistory } from "./property.models";
+import { Card, PropertyDetails, PropertyEstimateHistory } from "./propertyFetch.models";
 
 export const getSchemaPropertyDetailsFromPropertyDetails = (id: string, details: PropertyDetails): InferInsertModel<typeof propertyDetails> => {
   const convertToNumber = (value: string | number): number => {
