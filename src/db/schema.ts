@@ -166,3 +166,10 @@ export const cards = pgTable("cards", {
   agentId: varchar("agent_id"),
   propertyEstimateHistory: jsonb("property_estimate_history")
 });
+
+// Users Table
+export const users = pgTable("users", {
+  email: varchar("email").primaryKey().unique(),
+  hashedPassword: text("hashed_password"),
+  isAdmin: boolean("is_admin"),
+});
