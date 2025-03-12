@@ -42,3 +42,7 @@ export const insertedOrExistingCard = async (card: CardInsert) => {
     set: {id: cards.id} // No actual update, just returning the existing row
   }).returning({ id: cards.id });
 }
+
+export const updateCardsWithPropertyEstimateHistory = async (cardId: string, propertyEstimateHistory: JSON) => {
+  return await db.update(cards).set({ propertyEstimateHistory: propertyEstimateHistory }).where(eq(cards.id, cardId)).returning();
+}

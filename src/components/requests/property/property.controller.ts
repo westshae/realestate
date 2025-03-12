@@ -1,11 +1,51 @@
 import { cards, propertyDetails } from "@/db/schema";
 import { polyfills } from "./polyfill";
 import { MapItem, Card, PropertyDetails } from "./property.models";
-import { getMapItemsFromPolyfills, getProperty, getPropertyDetails, insertCardAndRelatedData } from "./property.services";
+import { getMapItemsFromPolyfills, getProperty, getPropertyDetails, getPropertyPriceEstimateHistory, insertCardAndRelatedData } from "./property.services";
 import { db } from "@/db";
 import { getSchemaPropertyDetailsFromPropertyDetails } from "./property.map";
 import { InferInsertModel } from "drizzle-orm";
-import { updateExistingPropertyDetails } from "./property.repos";
+import { updateCardsWithPropertyEstimateHistory, updateExistingPropertyDetails } from "./property.repos";
+
+export const getAllPropertyPriceEstimationHistory = async () => {
+  if (!process.env.LOCAL) {
+    return;
+  }
+  const ids = (await db.select({ id: cards.propertyId }).from(cards)).map(card => card.id);
+  const totalIds = ids.length;
+  let successIds = 0;
+  for (const id of ids) {
+    try {
+      if(!id) {
+        continue;
+      }
+      const estimateHistory: JSON | null = await Promise.race<JSON | null>([
+        getPropertyPriceEstimateHistory(id),
+        new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 5000))
+      ]);
+
+      
+
+      const delay = Math.random() * 100 + 150;
+      await new Promise(resolve => setTimeout(resolve, delay));
+
+      if (!estimateHistory) {
+        console.log("estimateHistories lack failure")
+        continue;
+      }
+      updateCardsWithPropertyEstimateHistory(id, estimateHistory);
+
+      successIds++;
+      console.log("Id updated: ", id, ":", successIds, ":", totalIds);
+
+    } catch (error) {
+      const delay = Math.random() * 1000 + 3000;
+      await new Promise(resolve => setTimeout(resolve, delay));
+      continue;
+    }
+  }
+
+}
 
 export const updateAllPropertyDetailsToDb = async () => {
   if (!process.env.LOCAL) {

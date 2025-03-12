@@ -1,5 +1,5 @@
 
-import { pgTable, varchar, text, integer, boolean, jsonb, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, varchar, text, integer, boolean, jsonb, timestamp, doublePrecision } from "drizzle-orm/pg-core";
 
 // Branch Table
 export const branches = pgTable("branches", {
@@ -164,5 +164,5 @@ export const cards = pgTable("cards", {
   featuredAt: timestamp("featured_at"),
   featuredPlan: integer("featured_plan"),
   agentId: varchar("agent_id"),
-
+  propertyEstimateHistory: jsonb("property_estimate_history")
 });

@@ -1,0 +1,1021 @@
+{
+  "id": "708b656a-848d-4578-8d52-3ef1289d4099",
+  "prevId": "513b9896-7287-499e-a084-b20805d46d3e",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.agents": {
+      "name": "agents",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "suburb_expert": {
+          "name": "suburb_expert",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "suburb_expert_location": {
+          "name": "suburb_expert_location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "profile_image_url": {
+          "name": "profile_image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "office_phone": {
+          "name": "office_phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mobile_phone": {
+          "name": "mobile_phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "branch_id": {
+          "name": "branch_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "team": {
+          "name": "team",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "canonical_url": {
+          "name": "canonical_url",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "detail": {
+          "name": "detail",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stats": {
+          "name": "stats",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sale_stats": {
+          "name": "sale_stats",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "testimonials": {
+          "name": "testimonials",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_member_id": {
+          "name": "tm_member_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.branches": {
+      "name": "branches",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "banner_url": {
+          "name": "banner_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "branch_name": {
+          "name": "branch_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "brand_name": {
+          "name": "brand_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "banner_background_hex_colour": {
+          "name": "banner_background_hex_colour",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "logo_url": {
+          "name": "logo_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "legal_name": {
+          "name": "legal_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "canonical_url": {
+          "name": "canonical_url",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "rental_partnership": {
+          "name": "rental_partnership",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "residential_partnership": {
+          "name": "residential_partnership",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_id": {
+          "name": "tm_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "detail": {
+          "name": "detail",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stats": {
+          "name": "stats",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.cards": {
+      "name": "cards",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "item_id": {
+          "name": "item_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "property_id": {
+          "name": "property_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "listing_id": {
+          "name": "listing_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_ids": {
+          "name": "tm_ids",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "branch_id": {
+          "name": "branch_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "state": {
+          "name": "state",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sales_count": {
+          "name": "sales_count",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "property_details": {
+          "name": "property_details",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "point": {
+          "name": "point",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_price": {
+          "name": "display_price",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "price": {
+          "name": "price",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "featured_at": {
+          "name": "featured_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "featured_plan": {
+          "name": "featured_plan",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agent_id": {
+          "name": "agent_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.points": {
+      "name": "points",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "lat": {
+          "name": "lat",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "long": {
+          "name": "long",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.property_details": {
+      "name": "property_details",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_address": {
+          "name": "display_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cover_image_url": {
+          "name": "cover_image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cover_image_url_source": {
+          "name": "cover_image_url_source",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "listing_images": {
+          "name": "listing_images",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "google_street_view_url": {
+          "name": "google_street_view_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "num_bathrooms": {
+          "name": "num_bathrooms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "num_bedrooms": {
+          "name": "num_bedrooms",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "num_car_spaces": {
+          "name": "num_car_spaces",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "latest_bedrooms": {
+          "name": "latest_bedrooms",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "latest_bathrooms": {
+          "name": "latest_bathrooms",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "latest_car_spaces": {
+          "name": "latest_car_spaces",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "latest_source": {
+          "name": "latest_source",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "headline": {
+          "name": "headline",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_value_revision_date": {
+          "name": "estimated_value_revision_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_lower_value_short": {
+          "name": "display_estimated_lower_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_upper_value_short": {
+          "name": "display_estimated_upper_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_value_short": {
+          "name": "display_estimated_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_rental_revision_date": {
+          "name": "estimated_rental_revision_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_rental_lower_value_short": {
+          "name": "display_estimated_rental_lower_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_rental_upper_value_short": {
+          "name": "display_estimated_rental_upper_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_rental_yield": {
+          "name": "estimated_rental_yield",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "capital_value": {
+          "name": "capital_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "improvement_value": {
+          "name": "improvement_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "land_value": {
+          "name": "land_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_capital_value_short": {
+          "name": "display_capital_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_improvement_value_short": {
+          "name": "display_improvement_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_land_value_short": {
+          "name": "display_land_value_short",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "current_revision_date": {
+          "name": "current_revision_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "first_gas_enabled": {
+          "name": "first_gas_enabled",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "flags": {
+          "name": "flags",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city_id": {
+          "name": "city_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "suburb_id": {
+          "name": "suburb_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_suburb_id": {
+          "name": "tm_suburb_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_region_id": {
+          "name": "tm_region_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tm_district_id": {
+          "name": "tm_district_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "unit_identifier": {
+          "name": "unit_identifier",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street_number": {
+          "name": "street_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street_alpha": {
+          "name": "street_alpha",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "street": {
+          "name": "street",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "suburb": {
+          "name": "suburb",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city": {
+          "name": "city",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "ta": {
+          "name": "ta",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "property_id": {
+          "name": "property_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "decade_built": {
+          "name": "decade_built",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "building_construction": {
+          "name": "building_construction",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "building_condition": {
+          "name": "building_condition",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "floor_area": {
+          "name": "floor_area",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "land_area": {
+          "name": "land_area",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "has_deck": {
+          "name": "has_deck",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "view_type": {
+          "name": "view_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "view_scope": {
+          "name": "view_scope",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "zone": {
+          "name": "zone",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "trees": {
+          "name": "trees",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "contour": {
+          "name": "contour",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mass_total_living_area": {
+          "name": "mass_total_living_area",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "legal_description": {
+          "name": "legal_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "category_code": {
+          "name": "category_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "certificate_of_title": {
+          "name": "certificate_of_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "valuation_reference_number": {
+          "name": "valuation_reference_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "land_use": {
+          "name": "land_use",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_lower_value": {
+          "name": "estimated_lower_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_upper_value": {
+          "name": "estimated_upper_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_value": {
+          "name": "estimated_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_rental_lower_value": {
+          "name": "estimated_rental_lower_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimated_rental_upper_value": {
+          "name": "estimated_rental_upper_value",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bath_estimate": {
+          "name": "bath_estimate",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bath_estimate_date": {
+          "name": "bath_estimate_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bed_estimate": {
+          "name": "bed_estimate",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bed_estimate_date": {
+          "name": "bed_estimate_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "suburb_name": {
+          "name": "suburb_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "city_name": {
+          "name": "city_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "claim_id": {
+          "name": "claim_id",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "claimed": {
+          "name": "claimed",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_events": {
+          "name": "user_events",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_lower_value": {
+          "name": "display_estimated_lower_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_upper_value": {
+          "name": "display_estimated_upper_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_value": {
+          "name": "display_estimated_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_rental_lower_value": {
+          "name": "display_estimated_rental_lower_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimated_rental_upper_value": {
+          "name": "display_estimated_rental_upper_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "building_site_coverage": {
+          "name": "building_site_coverage",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mass_garage_freestanding": {
+          "name": "mass_garage_freestanding",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "mass_garage_under_roof": {
+          "name": "mass_garage_under_roof",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "solar": {
+          "name": "solar",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "capital_value_digit": {
+          "name": "capital_value_digit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "improvement_value_digit": {
+          "name": "improvement_value_digit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "land_value_digit": {
+          "name": "land_value_digit",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_capital_value": {
+          "name": "display_capital_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_improvement_value": {
+          "name": "display_improvement_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_land_value": {
+          "name": "display_land_value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "image_urls": {
+          "name": "image_urls",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "images": {
+          "name": "images",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "video_urls": {
+          "name": "video_urls",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "core_logic_id": {
+          "name": "core_logic_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.property_estimate_history": {
+      "name": "property_estimate_history",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "varchar",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "property_id": {
+          "name": "property_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "date": {
+          "name": "date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "estimate": {
+          "name": "estimate",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "low_estimate": {
+          "name": "low_estimate",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "high_estimate": {
+          "name": "high_estimate",
+          "type": "double precision",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_estimate": {
+          "name": "display_estimate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_low_estimate": {
+          "name": "display_low_estimate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "display_high_estimate": {
+          "name": "display_high_estimate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

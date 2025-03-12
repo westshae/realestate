@@ -1,4 +1,4 @@
-import { savePropertiesFromAllPolyfillsToDb, updateAllPropertyDetailsToDb } from '@/components/requests/property/property.controller';
+import { getAllPropertyPriceEstimationHistory, savePropertiesFromAllPolyfillsToDb, updateAllPropertyDetailsToDb } from '@/components/requests/property/property.controller';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -8,7 +8,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
       }
       // const response = await savePropertiesFromAllPolyfillsToDb();
-      const response = await updateAllPropertyDetailsToDb();
+      // const response = await updateAllPropertyDetailsToDb();
+      const response = await getAllPropertyPriceEstimationHistory();
       
       return res.status(200).json(response);
     } catch (error) {

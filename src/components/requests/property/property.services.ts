@@ -1,7 +1,7 @@
 import { propertyDetails, branches, agents, cards } from "@/db/schema";
 import { InferInsertModel } from "drizzle-orm";
 import { getSchemaPropertyDetailsFromCard, getSchemaBranchesFromCard, getSchemaAgentFromCard, getSchemaCardFromCard } from "./property.map";
-import { Card, MapItem, PropertyDetails } from "./property.models";
+import { Card, MapItem, PropertyDetails, PropertyEstimateHistory } from "./property.models";
 import { insertedOrExistingAgent, insertedOrExistingBranch, insertedOrExistingPropertyDetails, insertedOrExistingCard } from "./property.repos";
 
 
@@ -61,6 +61,17 @@ export const getPropertyDetails = async (id: string): Promise<PropertyDetails | 
     return null;
   }
 } 
+
+export const getPropertyPriceEstimateHistory = async (id: string): Promise<JSON | null> => {
+  try {
+    const response = await fetch(`https://gateway.homes.co.nz/estimate/history/${id}`);
+    const text = await response.text();
+    return JSON.parse(text);
+  } catch (error) {
+    return null;
+  }
+} 
+
 
 export const getProperty = async (mapItem: MapItem): Promise<Card | null> => {
   try {
