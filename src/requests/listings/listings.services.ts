@@ -3,7 +3,7 @@ import { getSchemaListing } from "./listings.map";
 import { agents, branches, listings, propertyDetails } from "@/db/schema";
 import { getPropertyPriceEstimateHistory, getPropertySaleValuationHistory } from "../bank/bank.services";
 import { Listings } from "./listings.models";
-import { Agent, Branch } from "../bank/bank.models";
+import { Agent, Branch, Card } from "../bank/bank.models";
 import { insertedOrUpdatedAgent, insertedOrUpdatedBranch, insertedOrUpdatedPropertyDetails } from "../bank/bank.repos";
 import { getSchemaPropertyDetailsFromCard, getSchemaBranchesFromCard, getSchemaAgentFromCard } from "../bank/bank.map";
 import { insertListing } from "./listings.repos";
@@ -15,7 +15,7 @@ export const getAgentListings = async (id: string): Promise<any | null> => {
     const response = await fetch(`https://gateway.homes.co.nz/agents/${id}/listings`);
     const text = await response.text();
     const parsed = JSON.parse(text);
-    return parsed.cards;
+    return parsed.cards as Card[];
   } catch {
     return null;
   }

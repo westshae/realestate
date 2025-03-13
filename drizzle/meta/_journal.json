@@ -71,6 +71,13 @@
       "when": 1741879383983,
       "tag": "0009_fresh_firelord",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1741890644107,
+      "tag": "0010_perfect_sprite",
+      "breakpoints": true
     }
   ]
 }

@@ -203,3 +203,20 @@ export const listings = pgTable("listings", {
   propertyEstimateHistory: jsonb("property_estimate_history"),
   propertySalesValuationHistory: jsonb("property_sales_valuation_history")
 });
+
+// Sold Table
+export const sold = pgTable("sold", {
+  id: integer("id").primaryKey(),
+  propertyId: varchar("property_id"),
+  listingId: varchar("listing_id"),
+  saleType: text("sale_type"),
+  priceOn: text("price_on"),
+  price: text("price"),
+  displayPrice: text("display_price"),
+  canDisplaySalePrice: boolean("can_display_sale_price"),
+  councilConfirmed: boolean("council_confirmed"),
+  promotable: boolean("promotable"),
+  saleAgentsIds: text("sale_agents_ids").array(),
+  saleBranchesIds: text("sale_branches_ids").array(),
+  featured: jsonb("featured"),
+});
