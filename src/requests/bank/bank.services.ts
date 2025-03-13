@@ -1,8 +1,8 @@
 import { propertyDetails, branches, agents, cards } from "@/db/schema";
 import { InferInsertModel } from "drizzle-orm";
-import { getSchemaPropertyDetailsFromCard, getSchemaBranchesFromCard, getSchemaAgentFromCard, getSchemaCardFromCard } from "./propertyFetch.map";
-import { Card, MapItem, PropertyDetails } from "./propertyFetch.models";
-import { insertedOrExistingAgent, insertedOrExistingBranch, insertedOrExistingPropertyDetails, insertedOrExistingCard } from "./propertyFetch.repos";
+import { getSchemaPropertyDetailsFromCard, getSchemaBranchesFromCard, getSchemaAgentFromCard, getSchemaCardFromCard } from "./bank.map";
+import { Card, MapItem, PropertyDetails } from "./bank.models";
+import { insertedOrExistingAgent, insertedOrExistingBranch, insertedOrExistingPropertyDetails, insertedOrExistingCard } from "./bank.repos";
 
 
 

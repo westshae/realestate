@@ -174,3 +174,32 @@ export const users = pgTable("users", {
   hashedPassword: text("hashed_password"),
   isAdmin: boolean("is_admin"),
 });
+
+// Listing Table
+export const listings = pgTable("listings", {
+  id: text("id").primaryKey(),
+  dateScraped: timestamp("date_scraped"),
+  active: boolean("active"),
+  soldListingId: text("sold_listing_id"),
+  itemId: text("item_id"),
+  propertyId: varchar("property_id"),
+  listingId: text("listing_id"),
+  tmIds: text("tm_ids").array(),
+  branchId: varchar("branch_id"),
+  branchIds: text("branch_ids").array(),
+  state: integer("state"),
+  salesCount: integer("sales_count"),
+  propertyDetailId: varchar("property_detail_id"),
+  point: jsonb("point"),
+  displayPrice: text("display_price"),
+  price: text("price"),
+  date: timestamp("date"),
+  featuredAt: timestamp("featured_at"),
+  featuredPlan: integer("featured_plan"),
+  agentId: varchar("agent_id"),
+  agentIds: text("agent_ids").array(),
+  url: text("url"),
+  displayPriceShort: text("display_price_short"),
+  propertyEstimateHistory: jsonb("property_estimate_history"),
+  propertySalesValuationHistory: jsonb("property_sales_valuation_history")
+});

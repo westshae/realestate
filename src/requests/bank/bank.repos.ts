@@ -34,7 +34,7 @@ export const insertedOrExistingAgent = async (agent: AgentInsert): Promise<{ id:
   }).returning({ id: agents.id });
 }
 
-type CardInsert = InferInsertModel<typeof agents>;
+type CardInsert = InferInsertModel<typeof cards>;
 
 export const insertedOrExistingCard = async (card: CardInsert): Promise<{ id: string }[]> => {
   return await db.insert(cards).values(card).onConflictDoUpdate({
@@ -50,4 +50,25 @@ export const updateCardsWithPropertyEstimateHistory = async (cardId: string, pro
 
 export const updateCardsWithPropertySalesValuationHistory = async (cardId: string, propertySalesValuationHistory: JSON): Promise<{ id: string }[]> => {
   return await db.update(cards).set({ propertySalesValuationHistory: propertySalesValuationHistory }).where(eq(cards.id, cardId)).returning({id: cards.id});
+}
+
+export const insertedOrUpdatedPropertyDetails = async (propertyDetailsInsert: PropertyDetailsInsert): Promise<{ id: string }[]> => {
+  return await db.insert(propertyDetails).values(propertyDetailsInsert).onConflictDoUpdate({
+    target: [propertyDetails.id],
+    set: propertyDetailsInsert
+  }).returning({ id: propertyDetails.id });
+}
+
+export const insertedOrUpdatedBranch = async (branch: BranchInsert): Promise<{ id: string }[]> => {
+  return await db.insert(branches).values(branch).onConflictDoUpdate({
+    target: [branches.id],
+    set: branch
+  }).returning({ id: branches.id });
+}
+
+export const insertedOrUpdatedAgent = async (agent: AgentInsert): Promise<{ id: string }[]> => {
+  return await db.insert(agents).values(agent).onConflictDoUpdate({
+    target: [agents.id],
+    set: agent
+  }).returning({ id: agents.id });
 }

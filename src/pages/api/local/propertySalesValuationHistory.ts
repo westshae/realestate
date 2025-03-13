@@ -1,4 +1,4 @@
-import { getAllPropertySalesValuationHistory } from '@/requests/propertyFetch/propertyFetch.controller';
+import { getAllPropertySalesValuationHistory } from '@/requests/bank/bank.controller';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
