@@ -22,11 +22,11 @@ export const getAgentListings = async (id: string): Promise<any | null> => {
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const insertListingAndRelatedData = async (parsedListing: any): Promise<{ id: string; }[] | null> => {
+export const insertListingAndRelatedData = async (parsedListing: any): Promise<void> => {
   try {
     if (parsedListing.property_details) {
       const propertyDetailsToInsert: InferInsertModel<typeof propertyDetails> = getSchemaPropertyDetailsFromCard(parsedListing);
-      await insertedOrUpdatedPropertyDetails(propertyDetailsToInsert);
+      insertedOrUpdatedPropertyDetails(propertyDetailsToInsert);
     }
 
     let insertedBranchIds: { id: string }[] = [];
@@ -37,7 +37,7 @@ export const insertListingAndRelatedData = async (parsedListing: any): Promise<{
 
     if (insertedBranchIds.length > 0) {
       const agentToInsert: InferInsertModel<typeof agents> = getSchemaAgentFromCard(parsedListing, insertedBranchIds[0].id);
-      await insertedOrUpdatedAgent(agentToInsert);
+      insertedOrUpdatedAgent(agentToInsert);
     }
 
     const estimateHistory = await getPropertyPriceEstimateHistory(parsedListing.property_id)
@@ -72,9 +72,9 @@ export const insertListingAndRelatedData = async (parsedListing: any): Promise<{
     };
 
     const listingSchema: InferInsertModel<typeof listings> = getSchemaListing(listing, estimateHistory, salesValuationHistory);
-    return await insertListing(listingSchema);
+    insertListing(listingSchema);
   } catch {
     console.log("FAILED")
-    return null;
+    return;
   }
 }
